@@ -1,0 +1,27 @@
+{
+  "name": "htmlism",
+  "version": "0.0.1",
+  "description": "Template engine for pogoscript",
+  "main": "index.js",
+  "directories": {
+    "test": "spec"
+  },
+  "scripts": {
+    "test": "mogo spec/spec.pogo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/featurist/htmlism.git"
+  },
+  "keywords": [
+    "html", "template"
+  ],
+  "dependencies": {
+    "pogo": "0.0.2"
+  },
+  "devDependencies": {
+    "should": "1.2.0"
+  }, 
+  "author": "josh@featurist.co.uk",
+  "license": "BSD"
+}
