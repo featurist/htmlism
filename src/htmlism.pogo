@@ -47,7 +47,7 @@ evaluate (template) with (locals) =
     head.children.0
 
 execute (template) against (dsl) =
-    eval("with(dsl) { #(pogo.compile(template).javascript) };")
+    eval("with(dsl) { #(pogo.compile(template)) };")
 
 render (tree) as html =
     if ((tree) is a string)

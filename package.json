@@ -14,14 +14,15 @@
     "url": "https://github.com/featurist/htmlism.git"
   },
   "keywords": [
-    "html", "template"
+    "html",
+    "template"
   ],
   "dependencies": {
-    "pogo": "0.0.2"
+    "pogo": "~0.4.3"
   },
   "devDependencies": {
     "should": "1.2.0"
-  }, 
+  },
   "author": "josh@featurist.co.uk",
   "license": "BSD"
 }
