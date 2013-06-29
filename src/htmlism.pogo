@@ -12,63 +12,63 @@ tags = "a abbr address article aside audio b bdi bdo blockquote body button
 tags = tags.split r/\s/g
 
 evaluate (template) with (locals) =
-  
-  dsl = { }
-  head = { children = [] }
-  
-  element (name, attrs, contents) =
-    el = { name = name, attrs = attrs, children = [] }
-    head.children.push (el)
-    prev = head
-    head = el
-    if ((contents) is a string)
-      el.children.push(contents)
-    else
-      c = contents()
-      if ((c) is a string) @{ el.children.push(c) }
     
-    head = prev
-
-  define element (name) =
-    dsl.(name) =
-      fn () =
-        if (arguments.length == 2)
-          element (name, arguments.0, arguments.1)
+    dsl = { }
+    head = { children = [] }
+    
+    element (name, attrs, contents) =
+        el = { name = name, attrs = attrs, children = [] }
+        head.children.push (el)
+        prev = head
+        head = el
+        if ((contents) is a string)
+            el.children.push(contents)
         else
-          element (name, {}, arguments.0)
+            c = contents()
+            if ((c) is a string) @{ el.children.push(c) }
+        
+        head = prev
 
-  for each @(name) in (tags)
-    define element (name)
+    define element (name) =
+        dsl.(name) =
+            fn () =
+                if (arguments.length == 2)
+                    element (name, arguments.0, arguments.1)
+                else
+                    element (name, {}, arguments.0)
 
-  for @(local) in (locals) @{ dsl.(local) = locals.(local) }
-  
-  execute (template) against (dsl)
+    for each @(name) in (tags)
+        define element (name)
 
-  head.children.0
+    for @(local) in (locals) @{ dsl.(local) = locals.(local) }
+    
+    execute (template) against (dsl)
+
+    head.children.0
 
 execute (template) against (dsl) =
-  eval("with(dsl) { #(pogo.compile(template).javascript) };")
+    eval("with(dsl) { #(pogo.compile(template).javascript) };")
 
 render (tree) as html =
-  if ((tree) is a string)
-    tree
-  else
-    contents = tree.children.map @(child) @{ render (child) as html }
-    "<#(tree.name)#(render (tree) attributes)>#(contents.join(''))</#(tree.name)>"
+    if ((tree) is a string)
+        tree
+    else
+        contents = tree.children.map @(child) @{ render (child) as html }
+        "<#(tree.name)#(render (tree) attributes)>#(contents.join(''))</#(tree.name)>"
 
 render template as html (path, locals) =
-  template = fs.read file sync (path, 'utf-8')
-  tree = evaluate (template) with (locals)
-  render (tree) as html
+    template = fs.read file sync (path, 'utf-8')
+    tree = evaluate (template) with (locals)
+    render (tree) as html
 
 render (object) attributes =
-  str = ""
-  for @(attr) in (object.attrs)
-    str = str + ' ' + attr + '="' + object.attrs.(attr) + '"'
-  
-  str
+    str = ""
+    for @(attr) in (object.attrs)
+        str = str + ' ' + attr + '="' + object.attrs.(attr) + '"'
+    
+    str
 
 (object) is a string =
-  typeof (object) == 'string'
+    typeof (object) == 'string'
 
 module.exports = render template as html
