@@ -1,14 +1,14 @@
 # Htmlism
 
-A little template engine for [pogoscript](http://pogoscript.org/).
+A little template engine for [PogoScript](http://pogoscript.org/).
 
 Given some HTML, pogo style:
 
     html
       
-      body { class = 'important' }
+        body { class = 'important' }
         
-        p (message)
+            p (message)
 
 Running it through htmlism like this:
 
