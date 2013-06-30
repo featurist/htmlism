@@ -3,7 +3,7 @@ htmlism = require '../src/htmlism'
 describe 'htmlism'
     
     options = { page title = "pogo ftw" }
-    html = htmlism "./spec/example.pogo" (options)
+    html = htmlism.render file "./spec/example.pogo" (options)
     
     it 'makes html from a template'
         html.should.include "<html>"
