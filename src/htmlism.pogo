@@ -1,5 +1,6 @@
 pogo = require 'pogo'
 fs = require 'fs'
+dslify = require 'dslify'
 
 tags = "a abbr address article aside audio b bdi bdo blockquote body button
         canvas caption cite code colgroup datalist dd del details dfn div dl dt em
@@ -47,7 +48,10 @@ evaluate (template) with (locals) =
     head.children.0
 
 execute (template) against (dsl) =
-    eval("with(dsl) { #(pogo.compile(template)) };")
+    js = pogo.compile(template, in scope: false)
+    fn = new (Function (js))
+    transformed = dslify.transform(fn)
+    transformed(dsl)
 
 render (tree) as html =
     if ((tree) is a string)

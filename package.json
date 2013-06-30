@@ -1,6 +1,6 @@
 {
   "name": "htmlism",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Template engine for pogoscript",
   "main": "index.js",
   "directories": {
@@ -18,7 +18,8 @@
     "template"
   ],
   "dependencies": {
-    "pogo": "~0.4.3"
+    "pogo": "~0.4.3",
+    "dslify": "0.0.2"
   },
   "devDependencies": {
     "should": "1.2.0"
