@@ -7,7 +7,7 @@
     "test": "spec"
   },
   "scripts": {
-    "test": "mogo spec/spec.pogo"
+    "test": "./node_modules/.bin/mocha spec/spec.pogo"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,8 @@
   },
   "devDependencies": {
     "should": "1.2.0",
-    "cheerio": "~0.12.3"
+    "cheerio": "~0.12.3",
+    "mocha": "~1.14.0"
   },
   "author": "josh@featurist.co.uk",
   "license": "BSD"

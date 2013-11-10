@@ -24,7 +24,7 @@ evaluate (template) with (locals) =
         el = { name = name, attrs = attrs, children = [] }
         head.children.push (el)
         prev = head
-        head = el
+        head := el
         if ((contents) is a string)
             el.children.push(contents)
         else if ((contents) is a number)
@@ -33,7 +33,7 @@ evaluate (template) with (locals) =
             c = contents()
             if ((c) is a string) @{ el.children.push(c) }
 
-        head = prev
+        head := prev
 
     define element (name) =
         dsl.(name) =
@@ -68,7 +68,7 @@ render (tree) as html =
 render (object) attributes =
     str = ""
     for @(attr) in (object.attrs)
-        str = str + ' ' + attr + '="' + object.attrs.(attr) + '"'
+        str := [str, ' ', attr, '="', object.attrs.(attr), '"'].join ''
 
     str
 
