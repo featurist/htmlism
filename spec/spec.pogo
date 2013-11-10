@@ -19,3 +19,6 @@ describe 'htmlism'
     it 'binds local variables represented as an object'
         $('title').text().should.equal 'pogo ftw'
         $('h1').text().should.equal 'pogo ftw'
+
+    it 'renders numbers as strings'
+        $('#numbers p').eq(2).text().should.equal('3')

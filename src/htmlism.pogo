@@ -27,6 +27,8 @@ evaluate (template) with (locals) =
         head = el
         if ((contents) is a string)
             el.children.push(contents)
+        else if ((contents) is a number)
+            el.children.push(contents.to string())
         else
             c = contents()
             if ((c) is a string) @{ el.children.push(c) }
@@ -72,3 +74,6 @@ render (object) attributes =
 
 (object) is a string =
     typeof (object) == 'string'
+
+(object) is a number =
+    typeof (object) == 'number'
