@@ -2,8 +2,10 @@ html
     head
         title (page title)
 
-    body { id = 'pogo', class = 'happy days' }
+    body { id = 'super', class = 'happy days' }
         h1
             page title
 
-        p "Hello, pogo!"
+        awesome = "pogo"
+
+        p "Hello, #(awesome)!"
