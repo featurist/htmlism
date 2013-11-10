@@ -1,5 +1,6 @@
 htmlism = require '../src/htmlism'
 fs = require 'fs'
+cheerio = require 'cheerio'
 
 describe 'htmlism'
 
@@ -7,15 +8,14 @@ describe 'htmlism'
 
     html = htmlism.render (template, { page title = "pogo ftw" })
 
-    it 'makes html from a template'
-        html.should.match r/<html>.*<head>.*<\/head>.*<\/html>/g
+    $ = cheerio.load(html)
 
-    it 'renders a tree of function calls as elements'
-         html.should.match r/<h1>.+<\/h1>/g
+    it 'makes html from a template'
+        $('body h1').length.should.equal 1
 
     it 'renders the first argument to any element as attributes'
-        html.should.include '<body id="super" class="happy days">'
+        $('body#super.happy.days').length.should.equal 1
 
-    it 'binds an object as local variables'
-        html.should.include "<title>pogo ftw</title>"
-        html.should.include "<h1>pogo ftw</h1>"
+    it 'binds local variables represented as an object'
+        $('title').text().should.equal 'pogo ftw'
+        $('h1').text().should.equal 'pogo ftw'

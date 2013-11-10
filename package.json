@@ -1,6 +1,6 @@
 {
   "name": "htmlism",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Template engine for pogoscript",
   "main": "index.js",
   "directories": {
@@ -22,7 +22,8 @@
     "dslify": "0.0.4"
   },
   "devDependencies": {
-    "should": "1.2.0"
+    "should": "1.2.0",
+    "cheerio": "~0.12.3"
   },
   "author": "josh@featurist.co.uk",
   "license": "BSD"
