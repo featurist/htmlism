@@ -1,13 +1,11 @@
 pogo = require 'pogo'
-fs = require 'fs'
 dslify = require 'dslify'
 
-render file (path, locals) =
-    template = fs.read file sync (path, 'utf-8')
+render (template, locals) =
     tree = evaluate (template) with (locals)
     render (tree) as html
 
-exports.render file = render file
+exports.render = render
 
 tags = "a abbr address article aside audio b bdi bdo blockquote body button
         canvas caption cite code colgroup datalist dd del details dfn div dl dt em
@@ -18,10 +16,10 @@ tags = "a abbr address article aside audio b bdi bdo blockquote body button
         th thead time title tr u ul video".split r/\s/g
 
 evaluate (template) with (locals) =
-    
+
     dsl = { }
     head = { children = [] }
-    
+
     element (name, attrs, contents) =
         el = { name = name, attrs = attrs, children = [] }
         head.children.push (el)
@@ -32,7 +30,7 @@ evaluate (template) with (locals) =
         else
             c = contents()
             if ((c) is a string) @{ el.children.push(c) }
-        
+
         head = prev
 
     define element (name) =
@@ -47,7 +45,7 @@ evaluate (template) with (locals) =
         define element (name)
 
     for @(local) in (locals) @{ dsl.(local) = locals.(local) }
-    
+
     execute (template) against (dsl)
 
     head.children.0
@@ -69,7 +67,7 @@ render (object) attributes =
     str = ""
     for @(attr) in (object.attrs)
         str = str + ' ' + attr + '="' + object.attrs.(attr) + '"'
-    
+
     str
 
 (object) is a string =
