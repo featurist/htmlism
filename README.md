@@ -5,14 +5,14 @@ A little template engine for [PogoScript](http://pogoscript.org/).
 Given some HTML, pogo style:
 
     html
-      
+
         body { class = 'important' }
-        
+
             p (message)
 
 Running it through htmlism like this:
 
-     htmlism.render file 'path/to/template.pogo' { message = 'hello world' }
+     htmlism.render '<the-template-above>' { message = 'hello world' }
 
 Renders this string:
 
