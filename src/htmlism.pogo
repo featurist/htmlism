@@ -1,9 +1,10 @@
 pogo = require 'pogo'
 dslify = require 'dslify'
+renderer = require './html_renderer'
 
 render (template, locals) =
     tree = evaluate (template) with (locals)
-    render (tree) as html
+    renderer (tree)
 
 exports.render = render
 
@@ -58,16 +59,3 @@ execute (template) against (dsl) =
     transformed = dslify.transform(fn)
     transformed(dsl)
 
-render (tree) as html =
-    if (tree :: String)
-        tree
-    else
-        contents = tree.children.map @(child) @{ render (child) as html }
-        "<#(tree.name)#(render (tree) attributes)>#(contents.join(''))</#(tree.name)>"
-
-render (object) attributes =
-    str = ""
-    for @(attr) in (object.attrs)
-        str := [str, ' ', attr, '="', object.attrs.(attr), '"'].join ''
-
-    str
