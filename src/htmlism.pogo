@@ -25,13 +25,13 @@ evaluate (template) with (locals) =
         head.children.push (el)
         prev = head
         head := el
-        if ((contents) is a string)
+        if (contents :: String)
             el.children.push(contents)
-        else if ((contents) is a number)
+        else if (contents :: Number)
             el.children.push(contents.to string())
         else
             c = contents()
-            if ((c) is a string) @{ el.children.push(c) }
+            if (c :: String) @{ el.children.push(c) }
 
         head := prev
 
@@ -59,7 +59,7 @@ execute (template) against (dsl) =
     transformed(dsl)
 
 render (tree) as html =
-    if ((tree) is a string)
+    if (tree :: String)
         tree
     else
         contents = tree.children.map @(child) @{ render (child) as html }
@@ -71,9 +71,3 @@ render (object) attributes =
         str := [str, ' ', attr, '="', object.attrs.(attr), '"'].join ''
 
     str
-
-(object) is a string =
-    typeof (object) == 'string'
-
-(object) is a number =
-    typeof (object) == 'number'
