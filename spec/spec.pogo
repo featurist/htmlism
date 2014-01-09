@@ -6,7 +6,7 @@ describe 'htmlism'
 
     template = fs.read file sync ("#(__dirname)/example.pogo", 'utf-8')
 
-    html = htmlism.render (template, { page title = "pogo ftw" })
+    html = htmlism.render (template, { page title = "pogo ftw", numbers = [1, 2, 3] })
 
     $ = cheerio.load(html)
 

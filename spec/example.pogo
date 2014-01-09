@@ -12,5 +12,5 @@ html
 
         div { id = 'numbers' }
 
-            for each @(num) in [1, 2, 3]
+            for each @(num) in (numbers)
                 p (num)
