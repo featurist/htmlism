@@ -1,10 +1,10 @@
 pogo = require 'pogo'
 dslify = require 'dslify'
-renderer = require './html_renderer'
+html renderer = require './html_renderer'
 
 render (template, locals) =
-    tree = evaluate (template) with (locals)
-    renderer (tree)
+    tree = evaluate (template, locals)
+    html renderer (tree)
 
 exports.render = render
 
@@ -16,7 +16,7 @@ tags = "a abbr address article aside audio b bdi bdo blockquote body button
         select small span strong style sub summary sup table tbody td textarea tfoot
         th thead time title tr u ul video".split r/\s/g
 
-evaluate (template) with (locals) =
+evaluate (template, locals) =
 
     dsl = { }
     head = { children = [] }
@@ -59,3 +59,4 @@ execute (template) against (dsl) =
     transformed = dslify.transform(fn)
     transformed(dsl)
 
+exports.evaluate = evaluate
