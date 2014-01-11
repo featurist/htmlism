@@ -1,8 +1,8 @@
 {
   "name": "htmlism",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Template engine for pogoscript",
-  "main": "index.js",
+  "main": "src/htmlism.pogo",
   "directories": {
     "test": "spec"
   },
